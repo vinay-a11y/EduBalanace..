@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Application Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFC107;
+    padding: 10px 20px;
+    padding-top: 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: slideDown 1s ease-out;
+}
+.navbar:hover {
+    background-color: #f9f9f9;
+    transform: translateY(-5px);
+}
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.navbar .logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #000;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+.navbar .logo:hover {
+    color: #007BFF;
+}
+.navbar .menu {
+    display: flex;
+    gap: 30px;
+}
+.navbar .menu a {
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+.navbar .menu a:hover {
+    color: #007BFF;
+    transform: translateY(-3px);
+}
+.navbar .social {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.navbar .social a {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+.navbar .social a:hover {
+    transform: scale(1.2);
+}
+.navbar .login {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+.navbar .login:hover {
+    color: #007BFF;
+}
+
+        .loanResult {
+            width: 90%;
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #343a40;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+        .loan-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .card {
+            flex: 1;
+            margin: 10px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        #loanResult {
+            margin-top: 20px;
+            padding: 15px;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="home.html" class="logo">EDU<span >BALANCE </span></a>
+            <div class="menu">
+                <a href="inn.html#home">Home</a>
+                <a href="inn.html#features">Features</a>
+                <a href="inn.html#our-tips">Our tips</a>
+                <a href="inn.html#footer">Details</a>
+            </div>
+            <div class="social">
+                <span>123-456-7890</span>
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="login/profile.html" class="login" id="loginBtn">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+            </div>
+        </nav>
+    </header>
+    <div class="loanResult">
+        <h1>Application Form</h1>
+        <form id="loanApplicationForm">
+            <div class="form-group">
+                <label for="full-name">Full Name *</label>
+                <input type="text" id="full-name" name="full-name" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth *</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="text" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <h2>Course & Institution Details</h2>
+            <div class="form-group">
+                <label for="university">University/College Name *</label>
+                <input type="text" id="university" name="university" required>
+            </div>
+            <div class="form-group">
+                <label for="course">Course Name *</label>
+                <input type="text" id="course" name="course" required>
+            </div>
+            <div class="form-group">
+                <label for="duration">Course Duration (Years) *</label>
+                <input type="number" id="duration" name="duration" required>
+            </div>
+            <h2>Bank Details</h2>
+            <div class="form-group">
+                <label for="bank-name">Bank Name *</label>
+                <input type="text" id="bank-name" name="bank-name" required>
+            </div>
+            <div class="form-group">
+                <label for="account-number">Account Number *</label>
+                <input type="text" id="account-number" name="account-number" required>
+            </div>
+            <div class="form-group">
+                <label for="ifsc">IFSC Code *</label>
+                <input type="text" id="ifsc" name="ifsc" required>
+            </div>
+           
+            <h2>Loan Details</h2>
+            <div class="form-group">
+                <label for="loan-amount">Loan Amount Requested *</label>
+                <input type="number" id="loan-amount" name="loan-amount" required>
+            </div>
+            <div class="form-group">
+                <label for="repayment-period">Loan Repayment Period *</label>
+                <select id="repayment-period" name="repayment-period" required>
+                    <option value="5">5 years</option>
+                    <option value="10">10 years</option>
+                    <option value="15">15 years</option>
+                </select>
+                <h2>Loan Selection</h2>
+            <div class="loan-options">
+                <div class="card" id="simpleInterest">Simple Interest (8%)</div>
+                <div class="card" id="floatingInterest">Floating Interest (4%)</div>
+                <div class="card" id="compoundInterest">Compound Interest (6%)</div>
+            </div>
+            
+            <label for="loanType">Select Loan Type:</label>
+            <select id="loanType" required>
+                <option value="simple">Simple Interest (8%)</option>
+                <option value="floating">Floating Interest (4%)</option>
+                <option value="compound">Compound Interest (6%)</option>
+            </select>
+            
+            <button type="button"  class="submit-btn" id="calculateBtn">Calculate & Submit</button>
+            <div id="loanResult" style="display: none;"></div>
+
+            </div>
+            <h2>Upload Documents</h2>
+            <div class="form-group">
+                <label for="identity-proof">Identity Proof (PDF, JPG, PNG):</label>
+                <input type="file" id="identity-proof" name="identity-proof" accept=".pdf,.jpg,.png" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="income-proof">Income Proof (PDF, JPG, PNG):</label>
+                <input type="file" id="income-proof" name="income-proof" accept=".pdf,.jpg,.png" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="loan-application">Loan Application Form (PDF):</label>
+                <input type="file" id="loan-application" name="loan-application" accept=".pdf" required>
+            </div>
+            <button type="submit" class="submit-btn">Submit Application</button>
+
+        </form>
+    </div>
+    <script type="module" src="login/js/fire.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced User Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FFD54F, #FF6F61);
+            animation: gradientShift 10s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            width: 420px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transform: perspective(1000px) rotateX(5deg);
+            transition: transform 0.5s;
+        }
+
+        .card:hover {
+            transform: perspective(1000px) rotateX(0deg);
+        }
+
+        .profile-image-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #FFD54F;
+            transition: transform 0.3s;
+        }
+
+        .profile-image-container:hover .profile-image {
+            transform: scale(1.1);
+        }
+
+        .profile-image-container::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #FF6F61, #FFD54F);
+            z-index: -1;
+            opacity: 0.7;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 0.4; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+
+        .user-info {
+            background: rgba(248, 248, 248, 0.8);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .user-info:hover {
+            transform: translateY(-5px);
+        }
+
+        .name, .email {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            padding: 8px;
+            transition: color 0.3s;
+        }
+
+        .name:hover, .email:hover {
+            color: #6e8efb;
+        }
+
+        .loans-section {
+            margin-top: 25px;
+            text-align: left;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .loans-section:hover {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .loans-section h3 {
+            color: #6e8efb;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .loan-list {
+            list-style-type: none;
+        }
+
+        .loan-list li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+
+        .loan-list li:last-child {
+            border-bottom: none;
+        }
+
+        .loan-list li:hover {
+            background-color: rgba(110, 142, 251, 0.1);
+        }
+
+        .btn-container {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            width: 48%;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            color: white;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .btn:hover::after {
+            width: 300px;
+            height: 300px;
+            margin-left: -150px;
+            margin-top: -150px;
+        }
+
+        .home-btn { background: #4CAF50; }
+        .logout-btn { background: #F44336; }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            height: 20px;
+            margin: 8px 0;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="profile-image-container">
+            <img id="profileImage" src="/placeholder.svg?height=150&width=150" alt="Profile Image" class="profile-image">
+        </div>
+        
+        <div class="user-info">
+            <div id="userName" class="name skeleton"></div>
+            <div id="userEmail" class="email skeleton"></div>
+        </div>
+        
+        <div class="loans-section">
+            <h3>Applied Loans</h3>
+            <ul id="loanList" class="loan-list">
+                <li class="skeleton"></li>
+                <li class="skeleton"></li>
+                <li class="skeleton"></li>
+            </ul>
+        </div>
+
+        <div class="btn-container">
+            <button id="homeBtn" class="btn home-btn" onclick="window.location.href='/inn.html'">Home</button>
+            <button id="logoutBtn" class="btn logout-btn" >Logout</button>
+        </div>
+    </div>
+
+    <script type="module" src="js/profile.js"></script>
+      
+    
+    
+</body>
+</html>

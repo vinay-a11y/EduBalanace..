@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Linking CSS -->
+    <script type="module" src="/login/js/admin.js" defer></script> <!-- Linking JS -->
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background: #007bff;
+    color: white;
+}
+
+td a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.approve {
+    background: green;
+}
+
+.reject {
+    background: red;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Loan Applications</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                    <th>Loan Amount</th>
+                    <th>Identity Proof</th>
+                    <th>Income Proof</th>
+                    <th>Loan Application</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="applications-table">
+                <!-- Data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

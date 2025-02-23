@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/register.css">
+    <title>Register</title>
+</head>
+<body>
+    <div class="container">
+        <div class="illustration">
+            <img src="image.png" alt="Person signing up">
+        </div>
+        <div class="form-container">
+            <h1>Register</h1>
+            <form onsubmit="register(event)">
+                <div class="input-group">
+                    <input type="text" id="fullName" placeholder="Full Name" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="rePassword" placeholder="Re-enter Password" required>
+                </div>
+                <button type="submit" class="register-btn">Sign Up</button>
+                <div class="login-link">
+                    Already have an account? <a href="login.html">Log In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="js/auth.js" defer></script>
+
+</body>
+</html>

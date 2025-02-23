@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="illustration">
+            <img src="image.png" alt="Person using laptop">
+        </div>
+        <div class="form-container">
+            <h1>Log In</h1>
+            <form id="loginForm" onsubmit="login(event)">
+                <div class="input-group">
+                    <input type="email" id="loginEmail" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                </div>
+                <div class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                <button type="submit" class="login-btn">Log In</button>
+                <div class="create-account">
+                    <a href="register.html">Create an account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="js/auth.js" defer></script>
+
+</body>
+</html>
