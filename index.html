@@ -11,7 +11,12 @@
 <body>
     <header>
         <nav class="navbar">
-            <a href="home.html" class="logo">EDU<span >BALANCE </span></a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <a href="home.html" class="logo">EDU<span>BALANCE</span></a>
             <div class="menu">
                 <a href="#home">Home</a>
                 <a href="#features">Features</a>
@@ -19,8 +24,8 @@
                 <a href="#footer">Details</a>
             </div>
             <div class="social">
-                <span>123-456-7890</span>
-                <a href="#"><i class="fab fa-google"></i></a>
+                <span class="phone-number">123-456-7890</span>
+                <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
                 <!-- Auth Buttons -->
                 <div id="auth-buttons">
                     <a href="login/login.html" class="login" id="loginBtn">
@@ -32,6 +37,7 @@
                 </div>
             </div>
         </nav>
+        <div class="menu-overlay"></div>
     </header>
 
     <div id ="home"class="home-section">
@@ -83,7 +89,7 @@
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQKic3rejigf_iff5vkBu5LuFvy4JyJWoeKQ&s" alt="Engineering">
                 <h3>Engineering</h3>
                 <p>Start your journey in Engineering with world-class courses.</p>
-                <button class="apply-btn">Apply Now</button>
+                <button class="apply-btn" wind>Apply Now</button>
             </div>
     
             <div class="enroll-item">
@@ -166,6 +172,41 @@
         </div>
     </footer>
     <script type="module" src="login/js/auth.js" defer></script>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menu = document.querySelector('.navbar .menu');
+            const overlay = document.querySelector('.menu-overlay');
+            const socialSection = document.querySelector('.navbar .social');
+            
+            mobileMenu.addEventListener('click', function() {
+                this.classList.toggle('active');
+                menu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                socialSection.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            });
+            
+            overlay.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                menu.classList.remove('active');
+                overlay.classList.remove('active');
+                socialSection.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            });
+            
+            // Close menu when clicking a link
+            const menuLinks = document.querySelectorAll('.navbar .menu a');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    menu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    socialSection.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+        });
+        </script>
 </body>
 </html>

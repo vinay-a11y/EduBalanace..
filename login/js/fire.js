@@ -53,13 +53,31 @@ async function submitApplication(event) {
     }
 
     const uid = user.uid;
+    const phoneInput = document.getElementById("phone");
+
+    // Ensure intlTelInput is initialized properly
+    const iti = window.intlTelInputGlobals.getInstance(phoneInput);
+    if (!iti) {
+        alert("Phone input not initialized correctly.");
+        return;
+    }
+
+    // Get full phone number with country code
+    const fullPhoneNumber = iti.getNumber();
+
+    // Debugging: Check phone number before storing
+    console.log("Full Phone Number:", fullPhoneNumber);
+
+    // Validate phone number
+    if (!iti.isValidNumber()) {
+        alert("Please enter a valid phone number.");
+        return;
+    }
 
     // Get form values
     const fullName = document.getElementById("full-name").value.trim();
     const dob = document.getElementById("dob").value;
-    const phone = document.getElementById("phone").value.trim();
     const email = document.getElementById("email").value.trim();
-
     const loanAmount = parseFloat(document.getElementById("loan-amount").value.trim());
     const repaymentPeriod = parseInt(document.getElementById("repayment-period").value);
     const loanType = document.getElementById("loanType").value;
@@ -76,19 +94,13 @@ async function submitApplication(event) {
     const loanApplication = document.getElementById("loan-application").files[0];
 
     // **Input Validations**
-    if (!fullName || !dob || !phone || !email || isNaN(loanAmount) || isNaN(repaymentPeriod) || !loanType) {
+    if (!fullName || !dob || !email || isNaN(loanAmount) || isNaN(repaymentPeriod) || !loanType) {
         alert("Please fill in all required fields.");
         return;
     }
-    
+
     if (loanAmount <= 0 || repaymentPeriod <= 0) {
         alert("Loan amount and repayment period must be greater than zero.");
-        return;
-    }
-
-    const phonePattern = /^[0-9]{10}$/;
-    if (!phonePattern.test(phone)) {
-        alert("Please enter a valid 10-digit phone number.");
         return;
     }
 
@@ -110,8 +122,8 @@ async function submitApplication(event) {
 
     let yearlyInterest = (loanAmount * rate) / 100;
     let totalInterest = yearlyInterest * repaymentPeriod;
-    let totalAmount = loanType === "compound" 
-        ? loanAmount * Math.pow(1 + rate / 100, repaymentPeriod) 
+    let totalAmount = loanType === "compound"
+        ? loanAmount * Math.pow(1 + rate / 100, repaymentPeriod)
         : loanAmount + totalInterest;
 
     let yearlyPayment = totalAmount / repaymentPeriod;
@@ -132,7 +144,7 @@ async function submitApplication(event) {
         await addDoc(collection(db, "users", uid, "loans"), {
             fullName,
             dob,
-            phone,
+            phone: fullPhoneNumber, // ✅ Fixed phone number storage
             email,
             university, course, duration,
             bankname, accountnumber, ifsc,
@@ -150,6 +162,7 @@ async function submitApplication(event) {
             appliedAt: new Date()
         });
 
+        console.log("Application successfully submitted with phone:", fullPhoneNumber);
         alert("Application submitted successfully!");
         window.location.href = "login/profile.html"; // Redirect to success page
     } catch (error) {
@@ -211,4 +224,13 @@ function calculateLoan() {
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("calculateBtn").addEventListener("click", calculateLoan);
+});
+document.addEventListener("DOMContentLoaded", function() {
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+        separateDialCode: true, // Shows country code separately
+        initialCountry: "in", // Default country (India)
+        preferredCountries: ["in", "us", "gb"], // Preferred country list
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+    });
 });
