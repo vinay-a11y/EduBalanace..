@@ -28,11 +28,9 @@ const logoutBtn = document.getElementById("logoutBtn");
 // Check user authentication status
 onAuthStateChanged(auth, async (user) => {
     if (user) {
-        // Fetch user profile and loans
         await fetchUserProfile(user.uid);
     } else {
-        // Redirect to login page if not authenticated
-        window.location.href = "login.html";
+        window.location.href = "login.html"; // Redirect if not logged in
     }
 });
 
@@ -68,35 +66,56 @@ async function fetchUserLoans(userId) {
     if (!loansSnapshot.empty) {
         loansSnapshot.forEach((loanDoc) => {
             const loanData = loanDoc.data();
-            const loanId = loanDoc.id; // Get Loan ID
+            const loanId = loanDoc.id;
 
             let li = document.createElement("li");
             li.innerHTML = `
-                <strong>Amount:</strong> ₹${loanData.loanAmount} - 
+                <strong>Amount:</strong> ₹${loanData.loanAmount} -
                 <span style="color: ${loanData.status === 'Approved' ? 'green' : loanData.status === 'Rejected' ? 'red' : 'black'};">
                     ${loanData.status}
-
                 </span>
+                <div class="loan-buttons">
+                    <button class="pay-btn" data-loan-id="${loanId}">Pay Loan</button>
+                    <button class="transaction-btn" data-loan-id="${loanId}">Transaction Details</button>
+                    <button class="details-btn" data-loan-id="${loanId}">View Details</button>
+                </div>
             `;
 
-            // Make list item clickable
-            li.style.cursor = "pointer";
-            li.addEventListener("click", () => {
-                window.location.href = `/loandet.html?loanId=${loanId}`;
-            });
-
+            // Append loan entry to list
             loanList.appendChild(li);
         });
+
+        // Add event listeners for buttons after they are created
+        document.querySelectorAll(".pay-btn").forEach(button => {
+            button.addEventListener("click", (event) => {
+                const loanId = event.target.getAttribute("data-loan-id");
+                window.location.href = `/pay.html?loanId=${loanId}`;
+            });
+        });
+
+        document.querySelectorAll(".transaction-btn").forEach(button => {
+            button.addEventListener("click", (event) => {
+                const loanId = event.target.getAttribute("data-loan-id");
+                window.location.href = `/transaction.html?loanId=${loanId}`;
+            });
+        });
+
+        document.querySelectorAll(".details-btn").forEach(button => {
+            button.addEventListener("click", (event) => {
+                const loanId = event.target.getAttribute("data-loan-id");
+                window.location.href = `/loandet.html?loanId=${loanId}`;
+            });
+        });
+
     } else {
         loanList.innerHTML = "<li>No loans applied</li>";
     }
 }
 
-
 // Logout functionality
 logoutBtn.addEventListener("click", () => {
     signOut(auth).then(() => {
-        window.location.href = "login.html"; // Redirect after logout
+        window.location.href = "index.html"; // Redirect after logout
     }).catch((error) => {
         console.error("Logout Error:", error);
     });
