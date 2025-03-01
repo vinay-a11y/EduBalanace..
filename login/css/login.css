@@ -149,3 +149,52 @@
                 padding: 20px;
             }
         }
+        /* Center the progress container */
+.progress-container {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* SVG Styling */
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+/* Circle Styling */
+.progress-background,
+.progress-circle {
+    fill: none;
+    stroke-width: 8;
+    cx: 50;
+    cy: 50;
+    r: 40;
+}
+
+.progress-background {
+    stroke: #ddd;
+}
+
+.progress-circle {
+    stroke: #00aaff;
+    stroke-dasharray: 251.2;
+    stroke-dashoffset: 251.2; /* Initially hidden */
+    transition: stroke-dashoffset 0.5s ease-in-out;
+}
+
+/* Progress Text */
+.progress-text {
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}

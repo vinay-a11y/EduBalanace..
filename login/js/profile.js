@@ -57,6 +57,7 @@ async function fetchUserProfile(userId) {
 }
 
 // Fetch and display user loans from Firestore subcollection
+// Fetch and display user loans from Firestore subcollection
 async function fetchUserLoans(userId) {
     loanList.innerHTML = ""; // Clear previous data
 
@@ -68,15 +69,17 @@ async function fetchUserLoans(userId) {
             const loanData = loanDoc.data();
             const loanId = loanDoc.id;
 
+            const isApproved = loanData.status === "Approved";
+
             let li = document.createElement("li");
             li.innerHTML = `
-                <strong>Amount:</strong> ₹${loanData.loanAmount} -
+                <strong>Amount:</strong> ₹${loanData.loanAmount} - 
                 <span style="color: ${loanData.status === 'Approved' ? 'green' : loanData.status === 'Rejected' ? 'red' : 'black'};">
                     ${loanData.status}
                 </span>
                 <div class="loan-buttons">
-                    <button class="pay-btn" data-loan-id="${loanId}">Pay Loan</button>
-                    <button class="transaction-btn" data-loan-id="${loanId}">Transaction Details</button>
+                    <button class="pay-btn" data-loan-id="${loanId}" ${isApproved ? "" : "disabled"}>Pay Loan</button>
+                    <button class="transaction-btn" data-loan-id="${loanId}" ${isApproved ? "" : "disabled"}>Transaction Details</button>
                     <button class="details-btn" data-loan-id="${loanId}">View Details</button>
                 </div>
             `;

@@ -78,32 +78,60 @@ window.login = async function (event) {
         return;
     }
 
+    // Show the progress bar
+    document.getElementById("progressContainer").style.display = "flex";
+    updateProgress(25);
+
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        updateProgress(50);
         const user = userCredential.user;
 
-        // Check if email is verified
         if (!user.emailVerified) {
             alert("Please verify your email before logging in.");
+            updateProgress(0);
+            document.getElementById("progressContainer").style.display = "none";
             return;
         }
 
         const userDocRef = doc(db, "users", user.uid);
         const userDocSnap = await getDoc(userDocRef);
 
+        updateProgress(75);
+
         if (userDocSnap.exists()) {
             const userData = userDocSnap.data();
             localStorage.setItem("user", JSON.stringify(userData));
 
-            alert("Logged in successfully!");
-            window.location.href = "../inn.html";
+            updateProgress(100);
+
+            setTimeout(() => {
+                alert("Logged in successfully!");
+                window.location.href = "../inn.html";
+            }, 500);
         } else {
             alert("User data not found!");
+            updateProgress(0);
         }
     } catch (error) {
         alert("Error: " + error.message);
+        updateProgress(0);
+    } finally {
+        setTimeout(() => {
+            document.getElementById("progressContainer").style.display = "none";
+        }, 800);
     }
 };
+
+// Function to update progress dynamically
+function updateProgress(value) {
+    let circle = document.querySelector(".progress-circle");
+    let text = document.getElementById("progressText");
+
+    let offset = 251.2 - (value / 100) * 251.2;
+    circle.style.strokeDashoffset = offset;
+    text.textContent = `${value}%`;
+}
 
 // ==================== Resend Email Verification ====================
 window.resendVerificationEmail = async function () {
