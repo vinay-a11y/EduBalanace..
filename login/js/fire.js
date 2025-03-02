@@ -164,7 +164,7 @@ async function submitApplication(event) {
 
         console.log("Application successfully submitted with phone:", fullPhoneNumber);
         alert("Application submitted successfully!");
-        window.location.href = "login/profile.html"; // Redirect to success page
+        window.location.href = "/login/profile.html"; // Redirect to success page
     } catch (error) {
         console.error("Error submitting form:", error);
         alert("Error submitting application. Please try again.");

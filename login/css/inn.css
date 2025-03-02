@@ -11,7 +11,7 @@ body {
     justify-content: space-between;
     align-items: center;
     background-color: #FFC107;
-    padding: 10px 5%;
+    padding: 8px 8%;
     padding-top: 2rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -168,9 +168,9 @@ body {
 }
 
 .home-content h1 {
-    font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
+    font-size: clamp(4rem, 5vw, 3rem); /* Responsive font size */
     font-weight: bold;
-    color: #fff;
+    color: white;
     margin-bottom: 20px;
 }
 

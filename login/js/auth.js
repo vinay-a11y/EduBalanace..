@@ -107,7 +107,7 @@ window.login = async function (event) {
 
             setTimeout(() => {
                 alert("Logged in successfully!");
-                window.location.href = "../inn.html";
+                window.location.href = "/htmls/inn.html";
             }, 500);
         } else {
             alert("User data not found!");
@@ -148,15 +148,7 @@ window.resendVerificationEmail = async function () {
     }
 };
 
-// ==================== Logout Function ====================
-window.logout = function () {
-    signOut(auth).then(() => {
-        localStorage.removeItem("user");
-        window.location.href = "login.html"; // Redirect to login page
-    }).catch((error) => {
-        alert("Error logging out: " + error.message);
-    });
-};
+
 
 // ==================== Stay Logged In ====================
 onAuthStateChanged(auth, async (user) => {
