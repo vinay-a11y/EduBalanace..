@@ -42,24 +42,26 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!transactionSnapshot.empty) {
                 transactionSnapshot.forEach((doc) => {
                     const transaction = doc.data();
-                    const formattedDate = new Date(transaction.date.seconds * 1000).toLocaleString(); // Convert Firestore timestamp
-
+                    const formattedDate = new Date(transaction.createdAt).toLocaleString();
+                    
                     // Append transaction row to the table
                     const row = document.createElement("tr");
                     row.classList.add("fade-in");
 
                     row.innerHTML = `
-                        <td>${transaction.transactionId}</td>
                         <td>${transaction.amountPaid}</td>
+                        <td>${transaction.amountDue}</td>
+                        <td>${transaction.attempts}</td>
                         <td>${formattedDate}</td>
+                        <td>${transaction.receipt}</td>
+                        <td>${transaction.transactionId}</td>
                         <td class="${transaction.status === 'Success' ? 'success' : 'failed'}">${transaction.status}</td>
                     `;
 
                     transactionTableBody.appendChild(row);
                 });
-
             } else {
-                transactionTableBody.innerHTML = `<tr><td colspan="4">No transactions found.</td></tr>`;
+                transactionTableBody.innerHTML = `<tr><td colspan="7">No transactions found.</td></tr>`;
             }
         } catch (error) {
             console.error("Error fetching transactions:", error);

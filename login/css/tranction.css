@@ -23,7 +23,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     width: 90%;
-    max-width: 800px;
+    max-width: 1000px; /* Increased width to fit data in one line */
     text-align: center;
     color: white;
     animation: fadeIn 1s ease-in-out;
@@ -35,7 +35,8 @@ body {
 }
 
 .table-container {
-    overflow-x: auto;
+    width: 100%;
+    overflow-x: auto; /* Enables scrolling if needed */
     margin-top: 10px;
 }
 
@@ -45,14 +46,18 @@ table {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(8px);
     border-radius: 10px;
-    overflow: hidden;
+    table-layout: auto; /* Allows flexible column sizing */
 }
 
 th, td {
-    padding: 12px 15px;
+    padding: 10px;
     text-align: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
+    white-space: nowrap; /* Keeps all content in one line */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Prevents text from breaking */
+    max-width: 150px; /* Prevents columns from stretching too much */
 }
 
 th {
@@ -69,6 +74,7 @@ tr:hover {
     transform: scale(1.02);
 }
 
+/* Loader */
 .loading td {
     text-align: center;
     padding: 20px;
