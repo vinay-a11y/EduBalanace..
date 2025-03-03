@@ -199,6 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             console.log("✔️ Transaction stored successfully.");
+            window.location.href="transaction.html"
             alert('✔️ Payment recorded successfully.');
         } catch (error) {
             console.error("❌ Error storing transaction:", error);

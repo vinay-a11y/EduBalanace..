@@ -25,7 +25,7 @@
             <div class="social">
                 <span>123-456-7890</span>
                 <a href="#"><i class="fab fa-google"></i></a>
-                <a href="login/profile.html" class="login" id="loginBtn">
+                <a href="/login/profile.html" class="login" id="loginBtn">
                     <i class="fas fa-user"></i> Profile
                 </a>
             </div>
@@ -122,8 +122,11 @@
                 <label for="loan-application">Loan Application Form (PDF):</label>
                 <input type="file" id="loan-application" name="loan-application" accept=".pdf" required>
             </div>
-            <button type="submit" class="submit-btn">Submit Application</button>
-
+            <button type="submit" id="submitBtn" class="submit-btn">
+                Submit Application <span id="spinner" class="spinner"></span>
+            </button>
+            
+           
         </form>
     </div>
     <script type="module" src="/login/js/fire.js" defer></script>

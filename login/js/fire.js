@@ -42,13 +42,28 @@ async function uploadToCloudinary(file) {
     }
 }
 
-// Loan Application Form Submission
+// Loan Application Form Submission with Spinner
 async function submitApplication(event) {
     event.preventDefault();
+
+    const submitBtn = document.getElementById("submitBtn");
+    const spinner = document.getElementById("spinner");
+
+    // Ensure button and spinner exist
+    if (!submitBtn || !spinner) {
+        console.error("Submit button or spinner not found in HTML.");
+        return;
+    }
+
+    // Disable button and show spinner
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `Submitting... <span id="spinner" class="spinner"></span>`;
+    spinner.style.visibility = "visible";
 
     const user = auth.currentUser;
     if (!user) {
         alert("You must be logged in to apply for a loan.");
+        resetButton();
         return;
     }
 
@@ -59,18 +74,17 @@ async function submitApplication(event) {
     const iti = window.intlTelInputGlobals.getInstance(phoneInput);
     if (!iti) {
         alert("Phone input not initialized correctly.");
+        resetButton();
         return;
     }
 
     // Get full phone number with country code
     const fullPhoneNumber = iti.getNumber();
 
-    // Debugging: Check phone number before storing
-    console.log("Full Phone Number:", fullPhoneNumber);
-
     // Validate phone number
     if (!iti.isValidNumber()) {
         alert("Please enter a valid phone number.");
+        resetButton();
         return;
     }
 
@@ -96,16 +110,19 @@ async function submitApplication(event) {
     // **Input Validations**
     if (!fullName || !dob || !email || isNaN(loanAmount) || isNaN(repaymentPeriod) || !loanType) {
         alert("Please fill in all required fields.");
+        resetButton();
         return;
     }
 
     if (loanAmount <= 0 || repaymentPeriod <= 0) {
         alert("Loan amount and repayment period must be greater than zero.");
+        resetButton();
         return;
     }
 
     if (!identityProof || !incomeProof || !loanApplication) {
         alert("Please upload all required documents.");
+        resetButton();
         return;
     }
 
@@ -117,6 +134,7 @@ async function submitApplication(event) {
         case "compound": rate = 6; break;
         default:
             alert("Invalid loan type selected.");
+            resetButton();
             return;
     }
 
@@ -137,6 +155,7 @@ async function submitApplication(event) {
 
         if (!identityProofURL || !incomeProofURL || !loanApplicationURL) {
             alert("File upload failed. Please try again.");
+            resetButton();
             return;
         }
 
@@ -168,18 +187,33 @@ async function submitApplication(event) {
     } catch (error) {
         console.error("Error submitting form:", error);
         alert("Error submitting application. Please try again.");
+    } finally {
+        resetButton();
     }
 }
 
-// Attach function to form submit button after DOM is loaded
-window.onload = function () {
+// Reset button function
+function resetButton() {
+    const submitBtn = document.getElementById("submitBtn");
+    const spinner = document.getElementById("spinner");
+
+    if (!submitBtn || !spinner) return;
+
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = "Submit";
+    spinner.style.visibility = "hidden";
+}
+
+// Attach event listener when DOM loads
+document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("loanApplicationForm");
     if (form) {
         form.addEventListener("submit", submitApplication);
     } else {
         console.error("Form not found! Check the form ID in HTML.");
     }
-};
+});
+
 
 // Loan Calculation Function
 function calculateLoan() {
